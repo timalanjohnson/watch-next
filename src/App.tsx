@@ -6,6 +6,8 @@ import {
 } from '@tanstack/react-query'
 import axios from 'axios'
 
+import './App.css'
+
 const OMDB_URL = 'http://www.omdbapi.com';
 
 const queryClient = new QueryClient()
@@ -38,11 +40,14 @@ function Movies() {
   return (
     <div>
       <form>
+        <div className='row'>
         <input name="movies" defaultValue={queryParam}/>
         <button type="submit">Search</button>
+        </div>
       </form>
       {isLoading ? <Loader /> : null}
       {movies.length > 0 ? <MovieList movies={movies} /> : null }
+      {!isLoading && movies.length < 1 ? <p>Nothing found for '{queryParam}'.</p> : null}
     </div>
   )
 }
@@ -58,12 +63,13 @@ function MovieList({movies}: {movies: Array<Movie>}) {
 function MovieListItem({movie}: {movie: Movie}) {
   const [viewDetails, setViewDetails] = useState(false)
   return (
-    <li>
-      <img src={movie.Poster} height={100}/>
-      <h3>{movie.Title}</h3>
-      <h3>{movie.Year}</h3>
-      <button type="button" onClick={() => setViewDetails(!viewDetails)}>Details</button>
-      {viewDetails ? <MovieDetails id={movie.imdbID} /> : null}
+    <li className='row'>
+      <img src={movie.Poster} height={200}/>
+      <div className='column details'>
+        <h3>{movie.Title} ({movie.Year})</h3>
+        <button type="button" onClick={() => setViewDetails(!viewDetails)}>View details</button>
+        {viewDetails ? <MovieDetails id={movie.imdbID} /> : null}
+      </div>
     </li>
   )
 }
@@ -96,14 +102,8 @@ function MovieDetails({id}: {id: string}) {
 }
 
 function Loader() {
-  return <p>Loading...</p>
+  return <p className='spinner'>↻</p>
 }
 
-type Movie = {
-  Poster: string;
-  Title: string;
-  Year: string;
-  imdbID: string;
-}
 
 export default App;
