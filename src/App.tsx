@@ -105,5 +105,12 @@ function Loader() {
   return <p className='spinner'>↻</p>
 }
 
+type Movie = {
+  Title: string;
+  Poster: string;
+  Year: string;
+  imdbID: string;
+}
+
 
 export default App;
