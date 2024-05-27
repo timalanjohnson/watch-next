@@ -29,10 +29,12 @@ li {
 input {
   padding: 0.75em;
   width: 100%;
+  font-size: 1em;
 }
 
 .details {
   padding: 0 1em;
+  justify-content: space-between;
 }
 
 @keyframes spin {
@@ -54,4 +56,5 @@ input {
 .spinner {
   text-align: center;
   animation: spin 2s infinite;
+  width: 100%;
 }

@@ -67,15 +67,19 @@ function MovieList({movies}: {movies: Array<Movie>}) {
 function MovieListItem({movie}: {movie: Movie}) {
   const [viewDetails, setViewDetails] = useState(false);
   return (
-    <li className='row'>
-      <img src={movie.Poster} height={200} />
-      <div className='column details'>
-        <h3>
-          {movie.Title} ({movie.Year})
-        </h3>
-        <button type='button' onClick={() => setViewDetails(!viewDetails)}>
-          {viewDetails ? 'Hide' : 'View'} details
-        </button>
+    <li className='column'>
+      <div className='row'>
+        <img src={movie.Poster} height={200} />
+        <div className='column details'>
+          <h3>
+            {movie.Title} ({movie.Year})
+          </h3>
+          <button type='button' onClick={() => setViewDetails(!viewDetails)}>
+            {viewDetails ? 'Hide' : 'View'} details
+          </button>
+        </div>
+      </div>
+      <div className='row'>
         {viewDetails ? <MovieDetails id={movie.imdbID} /> : null}
       </div>
     </li>
