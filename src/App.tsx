@@ -98,9 +98,9 @@ function MovieDetails({id}: {id: string}) {
       <p>Directed by {data?.data?.Director}</p>
       <p>Starring {data?.data?.Actors}</p>
       <p>{data?.data?.Plot}</p>
+      <p>{data?.data?.Genre}</p>
       <p>{data?.data?.Runtime}</p>
       <p>{data?.data?.imdbRating}/10</p>
-      <p>{data?.data?.Genre}</p>
     </div>
   );
 }
