@@ -21,33 +21,33 @@ function App() {
 
 function Movies() {
   const searchParams = new URLSearchParams(document.location.search);
-  const queryParam = searchParams.get('movies') ?? undefined;
+  const movieQuery = searchParams.get('movies') ?? undefined;
   const {data, isLoading, error} = useQuery({
-    queryKey: [queryParam],
+    queryKey: [movieQuery],
     queryFn: async () => {
       return await axios.get(OMDB_URL, {
         params: {
           apiKey: import.meta.env.VITE_OMDB_API_KEY,
           type: 'movie',
-          s: queryParam,
+          s: movieQuery,
         },
       });
     },
   });
   const movies: Array<Movie> = data?.data.Search ?? [];
-  const isNoneFound = queryParam && !isLoading && !error && movies.length < 1;
+  const isNoneFound = movieQuery && !isLoading && !error && movies.length < 1;
 
   return (
     <div>
       <form>
         <div className='row'>
-          <input name='movies' defaultValue={queryParam} />
+          <input name='movies' defaultValue={movieQuery} />
           <button type='submit'>Search</button>
         </div>
       </form>
       {isLoading ? <Loader /> : null}
       {movies.length > 0 ? <MovieList movies={movies} /> : null}
-      {isNoneFound ? <p>Nothing found for '{queryParam}'.</p> : null}
+      {isNoneFound ? <p>Nothing found for '{movieQuery}'.</p> : null}
       {error ? <p>{error.message}</p> : null}
     </div>
   );
