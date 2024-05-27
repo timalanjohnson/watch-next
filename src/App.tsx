@@ -22,7 +22,7 @@ function App() {
 function Movies() {
   const searchParams = new URLSearchParams(document.location.search);
   const queryParam = searchParams.get('movies') ?? undefined;
-  const {data, isPending} = useQuery({
+  const {data, isPending, error} = useQuery({
     queryKey: [queryParam],
     queryFn: async () => {
       return await axios.get(OMDB_URL, {
@@ -34,7 +34,7 @@ function Movies() {
     },
   });
   const movies: Array<Movie> = data?.data.Search ?? [];
-  const isNoneFound = queryParam && !isPending && movies.length < 1;
+  const isNoneFound = queryParam && !isPending && !error && movies.length < 1;
 
   return (
     <div>
@@ -47,6 +47,7 @@ function Movies() {
       {isPending ? <Loader /> : null}
       {movies.length > 0 ? <MovieList movies={movies} /> : null}
       {isNoneFound ? <p>Nothing found for '{queryParam}'.</p> : null}
+      {error ? <p>{error.message}</p> : null}
     </div>
   );
 }
