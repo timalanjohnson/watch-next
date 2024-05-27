@@ -28,6 +28,7 @@ function Movies() {
       return await axios.get(OMDB_URL, {
         params: {
           apiKey: import.meta.env.VITE_OMDB_API_KEY,
+          type: 'movie',
           s: queryParam,
         },
       });
@@ -87,6 +88,7 @@ function MovieDetails({id}: {id: string}) {
       return await axios.get(OMDB_URL, {
         params: {
           apiKey: import.meta.env.VITE_OMDB_API_KEY,
+          plot: 'full',
           i: id,
         },
       });
