@@ -34,6 +34,7 @@ function Movies() {
     },
   });
   const movies: Array<Movie> = data?.data.Search ?? [];
+  const isNoneFound = queryParam && !isLoading && movies.length < 1;
 
   return (
     <div>
@@ -45,7 +46,7 @@ function Movies() {
       </form>
       {isLoading ? <Loader /> : null}
       {movies.length > 0 ? <MovieList movies={movies} /> : null}
-      {!isLoading && movies.length < 1 ? <p>Nothing found for '{queryParam}'.</p> : null}
+      {isNoneFound ? <p>Nothing found for '{queryParam}'.</p> : null}
     </div>
   );
 }
