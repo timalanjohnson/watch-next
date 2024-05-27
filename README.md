@@ -1,4 +1,9 @@
-# React + TypeScript + Vite
+# Watch Next
+A basic application to search for movies.
+
+Requires an [OMDB API key](https://www.omdbapi.com/apikey.aspx). Once you have acquired a key, assign it to the `VITE_OMDB_API_KEY` environment variable.
+
+## React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
