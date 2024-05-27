@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import './App.css';
 
-const OMDB_URL = 'http://www.omdbapi.com';
+const OMDB_URL = 'https://www.omdbapi.com';
 
 const queryClient = new QueryClient();
 
