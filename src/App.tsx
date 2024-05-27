@@ -33,6 +33,7 @@ function Movies() {
         },
       });
     },
+    enabled: !!movieQuery,
   });
   const movies: Array<Movie> = data?.data.Search ?? [];
   const isNoneFound = movieQuery && !isLoading && !error && movies.length < 1;
