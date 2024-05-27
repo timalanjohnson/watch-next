@@ -22,7 +22,7 @@ function App() {
 function Movies() {
   const searchParams = new URLSearchParams(document.location.search);
   const queryParam = searchParams.get('movies') ?? undefined;
-  const {data, isLoading} = useQuery({
+  const {data, isPending} = useQuery({
     queryKey: [queryParam],
     queryFn: async () => {
       return await axios.get(OMDB_URL, {
@@ -34,7 +34,7 @@ function Movies() {
     },
   });
   const movies: Array<Movie> = data?.data.Search ?? [];
-  const isNoneFound = queryParam && !isLoading && movies.length < 1;
+  const isNoneFound = queryParam && !isPending && movies.length < 1;
 
   return (
     <div>
@@ -44,7 +44,7 @@ function Movies() {
           <button type='submit'>Search</button>
         </div>
       </form>
-      {isLoading ? <Loader /> : null}
+      {isPending ? <Loader /> : null}
       {movies.length > 0 ? <MovieList movies={movies} /> : null}
       {isNoneFound ? <p>Nothing found for '{queryParam}'.</p> : null}
     </div>
@@ -80,7 +80,7 @@ function MovieListItem({movie}: {movie: Movie}) {
 }
 
 function MovieDetails({id}: {id: string}) {
-  const {data, isLoading} = useQuery({
+  const {data, isPending} = useQuery({
     queryKey: [id],
     queryFn: async () => {
       return await axios.get(OMDB_URL, {
@@ -91,7 +91,7 @@ function MovieDetails({id}: {id: string}) {
       });
     },
   });
-  if (isLoading) {
+  if (isPending) {
     return <Loader />;
   }
   return (
