@@ -71,7 +71,7 @@ function MovieListItem({movie}: {movie: Movie}) {
           {movie.Title} ({movie.Year})
         </h3>
         <button type='button' onClick={() => setViewDetails(!viewDetails)}>
-          View details
+          {viewDetails ? 'Hide' : 'View'} details
         </button>
         {viewDetails ? <MovieDetails id={movie.imdbID} /> : null}
       </div>
